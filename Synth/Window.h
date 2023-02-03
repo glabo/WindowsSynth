@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 #include "Keyboard.h"
+#include "WindowText.h"
 
 
 
@@ -12,7 +13,9 @@ public:
 	Window(const Window&) = delete;
 	Window& operator =(const Window&) = delete;
 	~Window();
+
 	Keyboard kbd;
+	WindowText keyboardInputText;
 
 	bool ProcessMessages();
 private:

@@ -1,4 +1,6 @@
 #include "Window.h"
+#include <string>
+#include <iostream>
 
 
 Window::Window()
@@ -90,8 +92,10 @@ LRESULT WINAPI Window::HandleMsgThunk(HWND hWnd, UINT uMsg, WPARAM wParam, LPARA
 	return pWnd->HandleMsg(hWnd, uMsg, wParam, lParam);
 }
 
+
 LRESULT Window::HandleMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	bool updateWindow = false;
 	switch (uMsg) {
 	case WM_CLOSE:
 		DestroyWindow(hWnd);
@@ -99,18 +103,38 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
+	case WM_PAINT:
+	{
+		PAINTSTRUCT ps;
+		HDC hdc = BeginPaint(hWnd, &ps);
+		RECT rect;
+		rect.left = 100;
+		rect.top = 100;
+		rect.right = rect.left + 500;
+		rect.bottom = rect.top + 500;
+
+		DrawTextA(hdc, keyboardInputText.GetText().c_str(), strlen(keyboardInputText.GetText().c_str()), &rect, DT_LEFT);
+		EndPaint(hWnd, &ps);
+		ReleaseDC(hWnd, hdc);
+		break;
+	}
 
 		/*********** Keyboard Messages *************/
 	case WM_KEYDOWN:
 		kbd.OnKeyPressed(static_cast<unsigned char>(wParam));
-		SetWindowTextA(hWnd, "YOU PRESSED SOMETHING");
 		break;
 	case WM_KEYUP:
 		kbd.OnKeyReleased(static_cast<unsigned char>(wParam));
 		break;
 	case WM_CHAR:
 		kbd.OnChar(static_cast<unsigned char>(wParam));
+		keyboardInputText.SetText("You pressed ", kbd.ReadChar());
+		std::cout << keyboardInputText.GetText() << "\n";
+		updateWindow = true;
 		break;
+	}
+	if (updateWindow) {
+		InvalidateRect(hWnd, NULL, false);
 	}
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
