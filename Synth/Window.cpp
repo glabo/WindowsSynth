@@ -1,20 +1,5 @@
 #include "Window.h"
 
-LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
-	switch (uMsg) {
-	case WM_CLOSE:
-		DestroyWindow(hWnd);
-		break;
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		return 0;
-	}
-
-	return DefWindowProc(hWnd, uMsg, wParam, lParam);
-}
-
-
 
 Window::Window()
 	: m_hInstance(GetModuleHandle(nullptr))
@@ -25,7 +10,7 @@ Window::Window()
 	wndClass.hInstance = m_hInstance;
 	wndClass.hIcon = LoadIcon(NULL, IDI_WINLOGO);
 	wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wndClass.lpfnWndProc = WindowProc;
+	wndClass.lpfnWndProc = HandleMsgSetup;
 
 	RegisterClass(&wndClass);
 
@@ -54,7 +39,7 @@ Window::Window()
 		NULL,
 		NULL,
 		m_hInstance,
-		NULL
+		this
 	);
 
 	ShowWindow(m_hWnd, SW_SHOW);
@@ -75,8 +60,57 @@ bool Window::ProcessMessages()
 		}
 
 		TranslateMessage(&msg);
-		DispatchMessage(&msg); // this calls the window procedure (WindowProc)
+		DispatchMessage(&msg); // this calls the window procedure
 	}
 
 	return true;
+}
+
+// Fancy stuff so that we can have window proc as a member function of window
+LRESULT WINAPI Window::HandleMsgSetup(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	if (uMsg == WM_NCCREATE) {
+		// get window class ptr from creation data
+		const CREATESTRUCTW* const pCreate = reinterpret_cast<CREATESTRUCTW*>(lParam);
+		Window* const pWnd = static_cast<Window*>(pCreate->lpCreateParams);
+		// set WinAPI-managed user data to store ptr to window class
+		SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pWnd));
+		// set message proc to normal handler
+		SetWindowLongPtr(hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(&Window::HandleMsgThunk));
+		// forward message to window class handler
+		return pWnd->HandleMsg(hWnd, uMsg, wParam, lParam);
+	}
+	// use default handler if we get another msg first
+	return DefWindowProc(hWnd, uMsg, wParam, lParam);
+}
+
+LRESULT WINAPI Window::HandleMsgThunk(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	Window* const pWnd = reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
+	return pWnd->HandleMsg(hWnd, uMsg, wParam, lParam);
+}
+
+LRESULT Window::HandleMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch (uMsg) {
+	case WM_CLOSE:
+		DestroyWindow(hWnd);
+		break;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		return 0;
+
+		/*********** Keyboard Messages *************/
+	case WM_KEYDOWN:
+		kbd.OnKeyPressed(static_cast<unsigned char>(wParam));
+		SetWindowTextA(hWnd, "YOU PRESSED SOMETHING");
+		break;
+	case WM_KEYUP:
+		kbd.OnKeyReleased(static_cast<unsigned char>(wParam));
+		break;
+	case WM_CHAR:
+		kbd.OnChar(static_cast<unsigned char>(wParam));
+		break;
+	}
+	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
