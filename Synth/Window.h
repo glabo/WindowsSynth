@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include "Keyboard.h"
 #include "WindowText.h"
-
+#include "NoteGenerator.h"
 
 
 class Window
@@ -16,6 +16,7 @@ public:
 
 	Keyboard kbd;
 	WindowText keyboardInputText;
+	NoteGenerator noteGenerator;
 
 	bool ProcessMessages();
 private:

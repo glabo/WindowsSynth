@@ -96,6 +96,7 @@ LRESULT WINAPI Window::HandleMsgThunk(HWND hWnd, UINT uMsg, WPARAM wParam, LPARA
 LRESULT Window::HandleMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	bool updateWindow = false;
+	unsigned char keycode;
 	switch (uMsg) {
 	case WM_CLOSE:
 		DestroyWindow(hWnd);
@@ -122,15 +123,33 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		/*********** Keyboard Messages *************/
 	case WM_KEYDOWN:
 		kbd.OnKeyPressed(static_cast<unsigned char>(wParam));
+		keycode = kbd.ReadKey().GetCode();
+		switch (keycode) {
+		case 0x5a:
+			noteGenerator.OctaveDown();
+			break;
+		case 0x58:
+			noteGenerator.OctaveUp();
+			break;
+		default:
+			if (noteGenerator.IsValidNote(keycode) && !noteGenerator.IsCurrentNoteHeld()) {
+				noteGenerator.OnNoteTrigger(keycode);
+				keyboardInputText.SetText(noteGenerator.PrintCurrentNote());
+				updateWindow = true;
+			}
+		}
 		break;
 	case WM_KEYUP:
 		kbd.OnKeyReleased(static_cast<unsigned char>(wParam));
+		keycode = kbd.ReadKey().GetCode();
+		if (noteGenerator.IsValidNote(keycode)) {
+			noteGenerator.OnNoteRelease(keycode);
+			keyboardInputText.SetText(noteGenerator.PrintCurrentNote());
+			updateWindow = true;
+		}
 		break;
 	case WM_CHAR:
 		kbd.OnChar(static_cast<unsigned char>(wParam));
-		keyboardInputText.SetText("You pressed ", kbd.ReadChar());
-		std::cout << keyboardInputText.GetText() << "\n";
-		updateWindow = true;
 		break;
 	}
 	if (updateWindow) {
