@@ -4,7 +4,7 @@
 #include "Keyboard.h"
 #include "WindowText.h"
 #include "NoteGenerator.h"
-
+#include "Oscillator.h"
 
 class Window
 {
@@ -17,6 +17,8 @@ public:
 	Keyboard kbd;
 	WindowText keyboardInputText;
 	NoteGenerator noteGenerator;
+	Oscillator oscillator1;
+
 
 	bool ProcessMessages();
 private:

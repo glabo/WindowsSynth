@@ -3,29 +3,12 @@
 #include <map>
 #include "MidiNoteMap.h"
 #include "Clock.h"
+#include "NoteEvent.h"
 
 // Need a letter -> note map in a header file to bring in here
 
 class NoteGenerator
 {
-private:
-	class NoteEvent
-	{
-	private:
-		std::string noteName = "";
-		double noteFrequency = 0L;
-		uint64_t triggerTime = 0L;
-		// Set to -1 so that first note trig works
-		uint64_t releaseTime = -1L;
-	public:
-		void SetName(std::string name);
-		void SetFreq(double freq);
-		void SetTriggerTime(std::time_t time);
-		void SetReleaseTime(std::time_t time);
-		bool IsNoteHeld();
-		std::string GetNoteInfo();
-	};
-
 public:
 	NoteGenerator() = default;
 
@@ -38,6 +21,7 @@ public:
 	bool IsCurrentNoteHeld();
 	bool IsValidNote(unsigned char keycode);
 
+	NoteEvent GetCurrentNote();
 	std::string PrintCurrentNote();
 
 private:

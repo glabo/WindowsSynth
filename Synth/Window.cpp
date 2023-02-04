@@ -135,6 +135,8 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			if (noteGenerator.IsValidNote(keycode) && !noteGenerator.IsCurrentNoteHeld()) {
 				noteGenerator.OnNoteTrigger(keycode);
 				keyboardInputText.SetText(noteGenerator.PrintCurrentNote());
+
+				oscillator1.TriggerNote(noteGenerator.GetCurrentNote());
 				updateWindow = true;
 			}
 		}

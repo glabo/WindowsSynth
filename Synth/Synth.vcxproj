@@ -130,15 +130,22 @@
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="NoteGenerator.cpp" />
+    <ClCompile Include="Oscillator.cpp" />
+    <ClCompile Include="NoteEvent.cpp" />
     <ClCompile Include="Synth.cpp" />
+    <ClCompile Include="WaveGenerator.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WindowText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="WaveTypes.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MidiNoteMap.h" />
+    <ClInclude Include="NoteEvent.h" />
     <ClInclude Include="NoteGenerator.h" />
+    <ClInclude Include="Oscillator.h" />
+    <ClInclude Include="WaveGenerator.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowText.h" />
   </ItemGroup>
