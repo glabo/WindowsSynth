@@ -42,6 +42,9 @@
     <ClCompile Include="NoteEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SynthModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -72,6 +75,15 @@
       <Filter>Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="NoteEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="olcNoiseMaker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioConstants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SynthModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

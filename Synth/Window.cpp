@@ -6,7 +6,6 @@
 Window::Window()
 	: m_hInstance(GetModuleHandle(nullptr))
 {
-
 	WNDCLASS wndClass = {};
 	wndClass.lpszClassName = CLASS_NAME;
 	wndClass.hInstance = m_hInstance;
@@ -45,11 +44,19 @@ Window::Window()
 	);
 
 	ShowWindow(m_hWnd, SW_SHOW);
+
+	// Get audio devices and set up audio
+	vector<wstring> devices = olcNoiseMaker<short>::Enumerate();
+	WaveOut = new olcNoiseMaker<short>(devices[0], &synthModule, SAMPLE_RATE, 1, 8, 256);
+	// set noise generation callback
+	WaveOut->SetUserFunction(synthModule.generateSoundCallback);
+
 }
 
 Window::~Window()
 {
 	UnregisterClass(CLASS_NAME, m_hInstance);
+	delete(WaveOut);
 }
 
 bool Window::ProcessMessages()
@@ -122,36 +129,17 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 		/*********** Keyboard Messages *************/
 	case WM_KEYDOWN:
-		kbd.OnKeyPressed(static_cast<unsigned char>(wParam));
-		keycode = kbd.ReadKey().GetCode();
-		switch (keycode) {
-		case 0x5a:
-			noteGenerator.OctaveDown();
-			break;
-		case 0x58:
-			noteGenerator.OctaveUp();
-			break;
-		default:
-			if (noteGenerator.IsValidNote(keycode) && !noteGenerator.IsCurrentNoteHeld()) {
-				noteGenerator.OnNoteTrigger(keycode);
-				keyboardInputText.SetText(noteGenerator.PrintCurrentNote());
-
-				oscillator1.TriggerNote(noteGenerator.GetCurrentNote());
-				updateWindow = true;
-			}
-		}
+		synthModule.TriggerNote(wParam);
+		keyboardInputText.SetText(synthModule.PrintCurrentNote());
+		updateWindow = true;
 		break;
 	case WM_KEYUP:
-		kbd.OnKeyReleased(static_cast<unsigned char>(wParam));
-		keycode = kbd.ReadKey().GetCode();
-		if (noteGenerator.IsValidNote(keycode)) {
-			noteGenerator.OnNoteRelease(keycode);
-			keyboardInputText.SetText(noteGenerator.PrintCurrentNote());
-			updateWindow = true;
-		}
+		synthModule.ReleaseNote(wParam);
+		keyboardInputText.SetText(synthModule.PrintCurrentNote());
+		updateWindow = true;
 		break;
 	case WM_CHAR:
-		kbd.OnChar(static_cast<unsigned char>(wParam));
+		//kbd.OnChar(static_cast<unsigned char>(wParam));
 		break;
 	}
 	if (updateWindow) {

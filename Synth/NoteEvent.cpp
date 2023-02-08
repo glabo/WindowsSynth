@@ -20,6 +20,11 @@ void NoteEvent::SetTriggerTime(std::time_t time)
 	triggerTime = time;
 }
 
+uint64_t NoteEvent::GetTriggerTime()
+{
+	return triggerTime;
+}
+
 void NoteEvent::SetReleaseTime(std::time_t time)
 {
 	releaseTime = time;

@@ -133,12 +133,16 @@
     <ClCompile Include="Oscillator.cpp" />
     <ClCompile Include="NoteEvent.cpp" />
     <ClCompile Include="Synth.cpp" />
+    <ClCompile Include="SynthModule.cpp" />
     <ClCompile Include="WaveGenerator.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WindowText.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioConstants.h" />
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="olcNoiseMaker.h" />
+    <ClInclude Include="SynthModule.h" />
     <ClInclude Include="WaveTypes.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MidiNoteMap.h" />

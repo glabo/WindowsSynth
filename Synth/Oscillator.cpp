@@ -5,11 +5,11 @@ Oscillator::Oscillator(WAVE_TYPE type)
 	waveType = type;
 }
 
-void Oscillator::TriggerNote(NoteEvent noteEvent)
-{
-	waveGenerator.PlayTone(waveType, noteEvent.GetFreq());
-}
+double Oscillator::Generate(const double dTime, double freq) {
 
-void Oscillator::ReleaseNote(NoteEvent noteEvent)
-{
+	const double phase = freq * 2 * M_PI;
+	switch (waveType) {
+	case SINE:
+		return sin(freq * dTime);
+	}
 }

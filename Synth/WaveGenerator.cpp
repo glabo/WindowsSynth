@@ -116,7 +116,7 @@ void WaveGenerator::PlayTone(WAVE_TYPE type, float freq)
 	{
 		pData[nIndex] = GenerateSineWave(fPhase, freq, (float)SAMPLE_RATE);
 	}
-
+	
 	WriteWaveFile("out.wav", pData, numSamples, numChannels, SAMPLE_RATE, true);
 }
 

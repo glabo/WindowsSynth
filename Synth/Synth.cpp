@@ -12,9 +12,6 @@ int main() {
 			std::cout << "Closing Window\n";
 			running = false;
 		}
-
-		//Render stuff
-		Sleep(10);
 	}
 
 	delete pWindow;

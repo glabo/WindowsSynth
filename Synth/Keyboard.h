@@ -3,7 +3,7 @@
 #include <bitset>
 class Keyboard
 {
-	friend class Window;
+	friend class SynthModule;
 
 public:
 	class Event

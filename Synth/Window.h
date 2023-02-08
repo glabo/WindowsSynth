@@ -5,6 +5,9 @@
 #include "WindowText.h"
 #include "NoteGenerator.h"
 #include "Oscillator.h"
+#include "olcNoiseMaker.h"
+#include "AudioConstants.h"
+#include "SynthModule.h"
 
 class Window
 {
@@ -13,12 +16,6 @@ public:
 	Window(const Window&) = delete;
 	Window& operator =(const Window&) = delete;
 	~Window();
-
-	Keyboard kbd;
-	WindowText keyboardInputText;
-	NoteGenerator noteGenerator;
-	Oscillator oscillator1;
-
 
 	bool ProcessMessages();
 private:
@@ -32,5 +29,11 @@ private:
 	HINSTANCE m_hInstance;
 	// window instance
 	HWND m_hWnd;
+
+	WindowText keyboardInputText;
+	SynthModule synthModule;
+
+	// soundwave output driver
+	olcNoiseMaker<short>* WaveOut;
 };
 

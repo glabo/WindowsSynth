@@ -3,6 +3,7 @@
 #include <math.h>
 #include <stdint.h>
 #include "WaveTypes.h"
+#include "AudioConstants.h"
 
 class WaveGenerator
 {
@@ -32,7 +33,6 @@ private:
 	};
 	void NormalizeAudioData(float* pData, int nNumSamples);
 public:
-	const int SAMPLE_RATE = 44100;
 	float GenerateSineWave(float& fPhase, float fFrequency, float fSampleRate);
 	bool WriteWaveFile(const char* szFileName, float* pRawData, int32_t nNumSamples, int16_t nNumChannels, int32_t nSampleRate, bool bNormalizeData);
 	void PlayTone(WAVE_TYPE type, float freq);
