@@ -4,6 +4,9 @@ SynthModule::SynthModule(int numOscillators)
 {
 	for (int i = 0; i < numOscillators; i++) {
 		oscillators.push_back(new Oscillator(TRIANGLE));
+		oscillators.push_back(new Oscillator(SINE));
+		oscillators.push_back(new Oscillator(SAW_DIGITAL));
+		oscillators.push_back(new Oscillator(SQUARE));
 	}
 }
 
@@ -18,14 +21,7 @@ void SynthModule::TriggerNote(unsigned char keycode)
 		noteGenerator.OctaveUp();
 		break;
 	default:
-		// Fix this logic, holding a note + hitting another note resets trigger time but not note value
 		if (noteGenerator.IsValidNote(keycode)) {
-			noteGenerator.OnNoteTrigger(keycode);
-			//keyboardInputText.SetText(noteGenerator.PrintCurrentNote());
-
-			/*for (auto osc : oscillators) {
-				osc->TriggerNote(noteGenerator.GetCurrentNote());
-			}*/
 		}
 	}
 }
