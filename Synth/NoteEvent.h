@@ -17,6 +17,7 @@ public:
 	void SetTriggerTime(std::time_t time);
 	uint64_t GetTriggerTime();
 	void SetReleaseTime(std::time_t time);
+	uint64_t GetReleaseTime();
 	bool IsNoteHeld();
 	std::string GetNoteInfo();
 };

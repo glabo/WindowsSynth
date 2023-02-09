@@ -30,6 +30,11 @@ void NoteEvent::SetReleaseTime(std::time_t time)
 	releaseTime = time;
 }
 
+uint64_t NoteEvent::GetReleaseTime()
+{
+	return releaseTime;
+}
+
 bool NoteEvent::IsNoteHeld()
 {
 	// releaseTime == 0 when note is still held

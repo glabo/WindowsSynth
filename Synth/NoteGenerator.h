@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <map>
+#include <vector>
 #include "MidiNoteMap.h"
 #include "Clock.h"
 #include "NoteEvent.h"
@@ -14,6 +15,7 @@ public:
 
 	void OnNoteTrigger(unsigned char keycode);
 	void OnNoteRelease(unsigned char keycode);
+	void TrimNotes(std::vector<std::string> trimNotes);
 
 	void OctaveDown();
 	void OctaveUp();
@@ -21,7 +23,7 @@ public:
 	bool IsCurrentNoteHeld();
 	bool IsValidNote(unsigned char keycode);
 
-	NoteEvent GetCurrentNote();
+	std::map<std::string, NoteEvent> GetCurrentNotes();
 	std::string PrintCurrentNote();
 
 private:
@@ -29,7 +31,7 @@ private:
 	const int MAX_OCTAVE = 8;
 	int currentOctave = 4; // C4 is middle C
 	//std::map<int, NoteEvent> curNote[88]; // map of currently playing notes, future improvement
-	NoteEvent curNote;
+	std::map<std::string, NoteEvent> curNotes;
 	MidiNoteMap midiNoteMap;
 	Clock Clock;
 };

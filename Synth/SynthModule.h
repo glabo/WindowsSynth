@@ -3,6 +3,7 @@
 #include "Oscillator.h"
 #include "Keyboard.h"
 #include "WaveTypes.h"
+#include "Clock.h"
 #include <vector>
 
 class SynthModule
@@ -20,6 +21,7 @@ public:
 	std::string PrintCurrentNote();
 private:
 	Keyboard kbd;
+	Clock Clock;
 	// NoteGenerator can only handle one note at a time right now
 
 	// Sound pipeline:
@@ -28,6 +30,7 @@ private:
 	std::vector<Oscillator*> oscillators;
 	// osc output mux
 	// ADSR envelope
+	double releaseTime = 0.0;
 	// FFT --> freq domain stage
 	// Filter + it's own ADSR
 };

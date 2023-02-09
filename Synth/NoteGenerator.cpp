@@ -3,23 +3,40 @@
 
 void NoteGenerator::OnNoteTrigger(unsigned char keycode)
 {
+	NoteEvent newNote;
 	int midiNote = midiNoteMap.KeyboardToMidiNote((int)keycode, currentOctave);
 	std::string noteName = midiNoteMap.GetNoteName(midiNote);
-	curNote.SetName(noteName);
+	newNote.SetName(noteName);
 
 	double freq = midiNoteMap.GetNoteFreq(midiNote);
-	curNote.SetFreq(freq);
+	newNote.SetFreq(freq);
 
 	uint64_t curTime = Clock.GetTime();
-	curNote.SetTriggerTime(curTime);
+	newNote.SetTriggerTime(curTime);
 	// Reset releaseTime
-	curNote.SetReleaseTime(Clock.Zero());
+	newNote.SetReleaseTime(Clock.Zero());
+
+	curNotes.insert({ noteName, newNote });
 }
 
 void NoteGenerator::OnNoteRelease(unsigned char keycode)
 {
 	uint64_t curTime = Clock.GetTime();
-	curNote.SetReleaseTime(curTime);
+	int midiNote = midiNoteMap.KeyboardToMidiNote((int)keycode, currentOctave);
+	std::string noteName = midiNoteMap.GetNoteName(midiNote);
+	if (curNotes.find(noteName) != curNotes.end()) {
+		curNotes[noteName].SetReleaseTime(curTime);
+	}
+}
+
+void NoteGenerator::TrimNotes(std::vector<std::string> trimNotes)
+{
+	for (auto trimNote : trimNotes) {
+		auto it = curNotes.find(trimNote);
+		if (it != curNotes.end()) {
+			curNotes.erase(it);
+		}
+	}
 }
 
 void NoteGenerator::OctaveDown()
@@ -38,7 +55,8 @@ void NoteGenerator::OctaveUp()
 
 bool NoteGenerator::IsCurrentNoteHeld()
 {
-	return curNote.IsNoteHeld();
+	//return curNote.IsNoteHeld();
+	return false;
 }
 
 bool NoteGenerator::IsValidNote(unsigned char keycode)
@@ -46,12 +64,16 @@ bool NoteGenerator::IsValidNote(unsigned char keycode)
 	return midiNoteMap.IsValidNote(keycode);
 }
 
-NoteEvent NoteGenerator::GetCurrentNote()
+std::map<std::string, NoteEvent> NoteGenerator::GetCurrentNotes()
 {
-	return curNote;
+	return curNotes;
 }
 
 std::string NoteGenerator::PrintCurrentNote()
 {
-	return curNote.GetNoteInfo();
+	if (curNotes.begin() == curNotes.end()) {
+		return "";
+	}
+	NoteEvent note = curNotes.begin()->second;
+	return note.GetNoteInfo();
 }
