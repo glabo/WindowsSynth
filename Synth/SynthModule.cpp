@@ -3,7 +3,7 @@
 SynthModule::SynthModule(int numOscillators)
 {
 	for (int i = 0; i < numOscillators; i++) {
-		oscillators.push_back(new Oscillator(SINE));
+		oscillators.push_back(new Oscillator(NOISE));
 	}
 }
 
