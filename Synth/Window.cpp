@@ -47,7 +47,7 @@ Window::Window()
 
 	// Get audio devices and set up audio
 	vector<wstring> devices = olcNoiseMaker<short>::Enumerate();
-	WaveOut = new olcNoiseMaker<short>(devices[0], &synthModule, SAMPLE_RATE, 1, 8, 256);
+	WaveOut = new olcNoiseMaker<short>(devices[0], &synthModule, SAMPLE_RATE, 1, 8, 512);
 	// set noise generation callback
 	WaveOut->SetUserFunction(synthModule.generateSoundCallback);
 
@@ -56,7 +56,6 @@ Window::Window()
 Window::~Window()
 {
 	UnregisterClass(CLASS_NAME, m_hInstance);
-	delete(WaveOut);
 }
 
 bool Window::ProcessMessages()
