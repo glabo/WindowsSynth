@@ -3,8 +3,7 @@
 SynthModule::SynthModule(int numOscillators)
 {
 	for (int i = 0; i < numOscillators; i++) {
-		oscillators.push_back(new Oscillator(TRIANGLE));
-		oscillators.push_back(new Oscillator(SINE));
+		//oscillators.push_back(new Oscillator(TRIANGLE));
 		oscillators.push_back(new Oscillator(SAW_DIGITAL));
 		oscillators.push_back(new Oscillator(SQUARE));
 	}
@@ -22,6 +21,7 @@ void SynthModule::TriggerNote(unsigned char keycode)
 		break;
 	default:
 		if (noteGenerator.IsValidNote(keycode)) {
+			noteGenerator.OnNoteTrigger(keycode);
 		}
 	}
 }
