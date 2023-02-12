@@ -1,11 +1,16 @@
 #include "Oscillator.h"
 
-Oscillator::Oscillator(WAVE_TYPE type)
+Oscillator::Oscillator(WAVE_TYPE type, int coarseOffset, int fineOffset)
 {
-	waveType = type;
+	this->waveType = type;
+	this->coarseOffset = coarseOffset;
+	this->fineOffset = fineOffset;
 }
 
-double Oscillator::Generate(const double dTime, double freq) {
+double Oscillator::Generate(const double dTime, NoteEvent noteInfo) {
+	double baseFreq = CalculateFreqForMidiNote(noteInfo.GetMidiNote() + coarseOffset);
+	// Calculate new frequency based on configured offset
+	double freq = baseFreq + fineOffset;
 
 	const double phase = freq * 2.0 * M_PI;
 	const double dPhase = phase * dTime;
@@ -35,4 +40,10 @@ double Oscillator::Generate(const double dTime, double freq) {
 	default:
 		return 0.0;
 	}
+}
+
+double Oscillator::CalculateFreqForMidiNote(int midiNote)
+{
+	double freq = 440.0 * pow(2.0, (double)(midiNote - 69) / (double)12);
+	return freq;
 }

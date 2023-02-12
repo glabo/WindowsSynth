@@ -4,8 +4,8 @@ SynthModule::SynthModule(int numOscillators)
 {
 	for (int i = 0; i < numOscillators; i++) {
 		//oscillators.push_back(new Oscillator(TRIANGLE));
-		oscillators.push_back(new Oscillator(SAW_DIGITAL));
-		oscillators.push_back(new Oscillator(SQUARE));
+		oscillators.push_back(new Oscillator(SINE));
+		oscillators.push_back(new Oscillator(SINE, 12, 1));
 	}
 }
 
@@ -58,7 +58,7 @@ double SynthModule::generateSound(double dTime)
 		else {
 			// generate sound
 			for (auto osc : oscillators) {
-				soundSample += osc->Generate(noteInfo.GetFreq(), dTime);
+				soundSample += osc->Generate(dTime, noteInfo);
 			}
 		}
 	}

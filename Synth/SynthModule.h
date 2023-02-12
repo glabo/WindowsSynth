@@ -1,5 +1,5 @@
 #pragma once
-#include "NoteGenerator.h"
+#include "NoteEventGenerator.h"
 #include "Oscillator.h"
 #include "Keyboard.h"
 #include "WaveTypes.h"
@@ -25,7 +25,7 @@ private:
 	// NoteGenerator can only handle one note at a time right now
 
 	// Sound pipeline:
-	NoteGenerator noteGenerator;
+	NoteEventGenerator noteGenerator;
 	// pitch envelope
 	std::vector<Oscillator*> oscillators;
 	// osc output mux

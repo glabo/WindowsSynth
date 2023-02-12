@@ -129,7 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Keyboard.cpp" />
-    <ClCompile Include="NoteGenerator.cpp" />
+    <ClCompile Include="NoteEventGenerator.cpp" />
     <ClCompile Include="Oscillator.cpp" />
     <ClCompile Include="NoteEvent.cpp" />
     <ClCompile Include="Synth.cpp" />
@@ -147,7 +147,7 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MidiNoteMap.h" />
     <ClInclude Include="NoteEvent.h" />
-    <ClInclude Include="NoteGenerator.h" />
+    <ClInclude Include="NoteEventGenerator.h" />
     <ClInclude Include="Oscillator.h" />
     <ClInclude Include="WaveGenerator.h" />
     <ClInclude Include="Window.h" />

@@ -27,7 +27,7 @@
     <ClCompile Include="WindowText.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NoteGenerator.cpp">
+    <ClCompile Include="NoteEventGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Clock.cpp">
@@ -56,7 +56,7 @@
     <ClInclude Include="WindowText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NoteGenerator.h">
+    <ClInclude Include="NoteEventGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MidiNoteMap.h">

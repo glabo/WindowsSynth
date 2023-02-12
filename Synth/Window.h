@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include "Keyboard.h"
 #include "WindowText.h"
-#include "NoteGenerator.h"
+#include "NoteEventGenerator.h"
 #include "Oscillator.h"
 #include "olcNoiseMaker.h"
 #include "AudioConstants.h"

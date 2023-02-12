@@ -5,14 +5,14 @@ void NoteEvent::SetName(std::string name)
 	noteName = name;
 }
 
-void NoteEvent::SetFreq(float freq)
+void NoteEvent::SetMidiNote(int note)
 {
-	noteFrequency = freq;
+	midiNote = note;
 }
 
-float NoteEvent::GetFreq()
+int NoteEvent::GetMidiNote()
 {
-	return noteFrequency;
+	return midiNote;
 }
 
 void NoteEvent::SetTriggerTime(std::time_t time)
@@ -45,7 +45,7 @@ std::string NoteEvent::GetNoteInfo()
 {
 	std::string noteTextOutput =
 		"Note Name: " + noteName + "\n" +
-		"Note Freq: " + std::to_string(noteFrequency) + "\n" +
+		"Midi Note: " + std::to_string(midiNote) + "\n" +
 		"Trigger time: " + std::to_string(triggerTime) + "\n" +
 		"Release time: " + std::to_string(releaseTime) + "\n";
 	return noteTextOutput;

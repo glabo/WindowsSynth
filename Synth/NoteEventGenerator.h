@@ -6,12 +6,10 @@
 #include "Clock.h"
 #include "NoteEvent.h"
 
-// Need a letter -> note map in a header file to bring in here
-
-class NoteGenerator
+class NoteEventGenerator
 {
 public:
-	NoteGenerator() = default;
+	NoteEventGenerator() = default;
 
 	void OnNoteTrigger(unsigned char keycode);
 	void OnNoteRelease(unsigned char keycode);
@@ -30,7 +28,6 @@ private:
 	const int MIN_OCTAVE = 0;
 	const int MAX_OCTAVE = 8;
 	int currentOctave = 4; // C4 is middle C
-	//std::map<int, NoteEvent> curNote[88]; // map of currently playing notes, future improvement
 	std::map<std::string, NoteEvent> curNotes;
 	MidiNoteMap midiNoteMap;
 	Clock Clock;

@@ -1,15 +1,13 @@
-#include "NoteGenerator.h"
+#include "NoteEventGenerator.h"
 #include <iostream>
 
-void NoteGenerator::OnNoteTrigger(unsigned char keycode)
+void NoteEventGenerator::OnNoteTrigger(unsigned char keycode)
 {
 	NoteEvent newNote;
 	int midiNote = midiNoteMap.KeyboardToMidiNote((int)keycode, currentOctave);
+	newNote.SetMidiNote(midiNote);
 	std::string noteName = midiNoteMap.GetNoteName(midiNote);
 	newNote.SetName(noteName);
-
-	double freq = midiNoteMap.GetNoteFreq(midiNote);
-	newNote.SetFreq(freq);
 
 	uint64_t curTime = Clock.GetTime();
 	newNote.SetTriggerTime(curTime);
@@ -19,7 +17,7 @@ void NoteGenerator::OnNoteTrigger(unsigned char keycode)
 	curNotes.insert({ noteName, newNote });
 }
 
-void NoteGenerator::OnNoteRelease(unsigned char keycode)
+void NoteEventGenerator::OnNoteRelease(unsigned char keycode)
 {
 	uint64_t curTime = Clock.GetTime();
 	int midiNote = midiNoteMap.KeyboardToMidiNote((int)keycode, currentOctave);
@@ -29,7 +27,7 @@ void NoteGenerator::OnNoteRelease(unsigned char keycode)
 	}
 }
 
-void NoteGenerator::TrimNotes(std::vector<std::string> trimNotes)
+void NoteEventGenerator::TrimNotes(std::vector<std::string> trimNotes)
 {
 	for (auto trimNote : trimNotes) {
 		auto it = curNotes.find(trimNote);
@@ -39,37 +37,37 @@ void NoteGenerator::TrimNotes(std::vector<std::string> trimNotes)
 	}
 }
 
-void NoteGenerator::OctaveDown()
+void NoteEventGenerator::OctaveDown()
 {
 	if (currentOctave > MIN_OCTAVE) {
 		currentOctave--;
 	}
 }
 
-void NoteGenerator::OctaveUp()
+void NoteEventGenerator::OctaveUp()
 {
 	if (currentOctave < MAX_OCTAVE) {
 		currentOctave++;
 	}
 }
 
-bool NoteGenerator::IsCurrentNoteHeld()
+bool NoteEventGenerator::IsCurrentNoteHeld()
 {
 	//return curNote.IsNoteHeld();
 	return false;
 }
 
-bool NoteGenerator::IsValidNote(unsigned char keycode)
+bool NoteEventGenerator::IsValidNote(unsigned char keycode)
 {
 	return midiNoteMap.IsValidNote(keycode);
 }
 
-std::map<std::string, NoteEvent> NoteGenerator::GetCurrentNotes()
+std::map<std::string, NoteEvent> NoteEventGenerator::GetCurrentNotes()
 {
 	return curNotes;
 }
 
-std::string NoteGenerator::PrintCurrentNote()
+std::string NoteEventGenerator::PrintCurrentNote()
 {
 	if (curNotes.begin() == curNotes.end()) {
 		return "";

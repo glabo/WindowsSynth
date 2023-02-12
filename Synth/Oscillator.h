@@ -7,10 +7,14 @@
 class Oscillator
 {
 public:
-	Oscillator(WAVE_TYPE type);
-	double Generate(const double time, double freq);
+	Oscillator(WAVE_TYPE type, int coarseOffset = 0, int fineOffset = 0);
+	double Generate(const double time, NoteEvent noteInfo);
 private:
+	double CalculateFreqForMidiNote(int midiNote);
+
 	WaveGenerator waveGenerator;
 	WAVE_TYPE waveType = SINE;
+	int coarseOffset = 0; // offset in midi notes/half steps
+	int fineOffset = 0;  // offset in Hz
 };
 

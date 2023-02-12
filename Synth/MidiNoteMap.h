@@ -88,4 +88,8 @@ public:
 		double freq = 440.0 * pow(2.0, (double)(midiNote - 69) / (double)12);
 		return freq;
 	}
+
+	double GetFreqForNote(double freq) {
+		double midiNote = 12 * log2(freq / 440) + 69;
+	}
 };
