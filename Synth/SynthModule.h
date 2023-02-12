@@ -21,13 +21,15 @@ public:
 	std::string PrintCurrentNote();
 private:
 	Keyboard kbd;
-	Clock Clock;
+	Clock clock;
 	// NoteGenerator can only handle one note at a time right now
 
 	// Sound pipeline:
 	NoteEventGenerator noteGenerator;
 	// pitch envelope
 	std::vector<Oscillator*> oscillators;
+	// Longest release time for an oscillator, for evicting notes from queue
+	int maxReleaseValue = 0;
 	// osc output mux
 	// FFT --> freq domain stage
 	// Filter + it's own ADSR

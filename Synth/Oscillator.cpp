@@ -48,6 +48,11 @@ double Oscillator::Generate(const double dTime, NoteEvent noteInfo) {
 	return baseValue * volume;
 }
 
+int Oscillator::getReleaseTime()
+{
+	return envelope.getReleaseValue();
+}
+
 double Oscillator::CalculateFreqForMidiNote(int midiNote)
 {
 	double freq = 440.0 * pow(2.0, (double)(midiNote - 69) / (double)12);

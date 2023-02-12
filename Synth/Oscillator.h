@@ -10,6 +10,8 @@ class Oscillator
 public:
 	Oscillator(WAVE_TYPE type, int coarseOffset = 0, int fineOffset = 0);
 	double Generate(const double time, NoteEvent noteInfo);
+
+	int getReleaseTime();
 private:
 	double CalculateFreqForMidiNote(int midiNote);
 

@@ -7,6 +7,10 @@ SynthModule::SynthModule(int numOscillators)
 		oscillators.push_back(new Oscillator(SINE));
 		//oscillators.push_back(new Oscillator(SINE, 12, 1));
 	}
+
+	for (auto osc : oscillators) {
+		maxReleaseValue = std::max(maxReleaseValue, osc->getReleaseTime());
+	}
 }
 
 void SynthModule::TriggerNote(unsigned char keycode)
@@ -44,9 +48,10 @@ double SynthModule::generateSound(double dTime)
 		NoteEvent noteInfo = noteEntry.second;
 
 		uint64_t releaseTime = noteInfo.GetReleaseTime();
+		uint64_t timeSinceRelease = clock.GetTime() - releaseTime;
 
 		// If the release envelope is complete, remove note from currently playing notes
-		if (releaseTime > 0) {
+		if (releaseTime > 0 && timeSinceRelease > maxReleaseValue) {
 			trimNotes.push_back(midiNote);
 		}
 		// generate sound
@@ -54,7 +59,7 @@ double SynthModule::generateSound(double dTime)
 			soundSample += osc->Generate(dTime, noteInfo);
 		}
 	}
-	//noteGenerator.TrimNotes(trimNotes);
+	noteGenerator.TrimNotes(trimNotes);
 	return soundSample;
 }
 

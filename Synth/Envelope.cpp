@@ -19,6 +19,7 @@ double Envelope::calculateVolume(uint64_t triggerTime, uint64_t releaseTime)
 			// sustain phase
 			volume = envelope.sustain;
 		}
+		previousVolume = volume;
 	}
 	else {
 		// release phase
@@ -26,6 +27,11 @@ double Envelope::calculateVolume(uint64_t triggerTime, uint64_t releaseTime)
 		volume = calculateReleaseVolume(timeFromRelease);
 	}
 	return volume;
+}
+
+int Envelope::getReleaseValue()
+{
+	return envelope.release;
 }
 
 double Envelope::calculateAttackVolume(uint64_t curTime)
@@ -48,5 +54,5 @@ double Envelope::calculateReleaseVolume(uint64_t curTime)
 		return 0.0;
 	}
 	double releaseDecay = 1.0 - ((double)curTime / (double)envelope.release);
-	return releaseDecay * envelope.sustain;
+	return releaseDecay * previousVolume;
 }
