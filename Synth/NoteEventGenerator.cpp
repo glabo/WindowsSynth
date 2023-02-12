@@ -3,6 +3,10 @@
 
 void NoteEventGenerator::OnNoteTrigger(unsigned char keycode)
 {
+	if (!IsValidNote(keycode)) {
+		return;
+	}
+
 	NoteEvent newNote;
 	int midiNote = midiNoteMap.KeyboardToMidiNote((int)keycode, currentOctave);
 	newNote.SetMidiNote(midiNote);
@@ -19,6 +23,10 @@ void NoteEventGenerator::OnNoteTrigger(unsigned char keycode)
 
 void NoteEventGenerator::OnNoteRelease(unsigned char keycode)
 {
+	if (!IsValidNote(keycode)) {
+		return;
+	}
+
 	uint64_t curTime = Clock.GetTime();
 	int midiNote = midiNoteMap.KeyboardToMidiNote((int)keycode, currentOctave);
 	std::string noteName = midiNoteMap.GetNoteName(midiNote);
@@ -49,12 +57,6 @@ void NoteEventGenerator::OctaveUp()
 	if (currentOctave < MAX_OCTAVE) {
 		currentOctave++;
 	}
-}
-
-bool NoteEventGenerator::IsCurrentNoteHeld()
-{
-	//return curNote.IsNoteHeld();
-	return false;
 }
 
 bool NoteEventGenerator::IsValidNote(unsigned char keycode)

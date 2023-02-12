@@ -20,18 +20,14 @@ void SynthModule::TriggerNote(unsigned char keycode)
 		noteGenerator.OctaveUp();
 		break;
 	default:
-		if (noteGenerator.IsValidNote(keycode)) {
-			noteGenerator.OnNoteTrigger(keycode);
-		}
+		noteGenerator.OnNoteTrigger(keycode);
 	}
 }
 
 void SynthModule::ReleaseNote(unsigned char keycode)
 {
 	kbd.OnKeyReleased(static_cast<unsigned char>(keycode));
-	if (noteGenerator.IsValidNote(keycode)) {
-		noteGenerator.OnNoteRelease(keycode);
-	}
+	noteGenerator.OnNoteRelease(keycode);
 }
 
 double SynthModule::generateSoundCallback(double dTime, SynthModule* synth)

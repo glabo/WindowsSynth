@@ -18,7 +18,6 @@ public:
 	void OctaveDown();
 	void OctaveUp();
 
-	bool IsCurrentNoteHeld();
 	bool IsValidNote(unsigned char keycode);
 
 	std::map<std::string, NoteEvent> GetCurrentNotes();
