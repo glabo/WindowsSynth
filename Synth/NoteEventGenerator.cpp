@@ -9,6 +9,11 @@ void NoteEventGenerator::OnNoteTrigger(unsigned char keycode)
 
 	NoteEvent newNote;
 	int midiNote = midiNoteMap.KeyboardToMidiNote((int)keycode, currentOctave);
+
+	if (curNotes.find(midiNote) != curNotes.end() && curNotes[midiNote].GetReleaseTime() != 0) {
+		curNotes.erase(curNotes.find(midiNote));
+	}
+
 	newNote.SetMidiNote(midiNote);
 	std::string noteName = midiNoteMap.GetNoteName(midiNote);
 	newNote.SetName(noteName);
@@ -18,7 +23,7 @@ void NoteEventGenerator::OnNoteTrigger(unsigned char keycode)
 	// Reset releaseTime
 	newNote.SetReleaseTime(Clock.Zero());
 
-	curNotes.insert({ noteName, newNote });
+	curNotes.insert({midiNote, newNote});
 }
 
 void NoteEventGenerator::OnNoteRelease(unsigned char keycode)
@@ -29,13 +34,12 @@ void NoteEventGenerator::OnNoteRelease(unsigned char keycode)
 
 	uint64_t curTime = Clock.GetTime();
 	int midiNote = midiNoteMap.KeyboardToMidiNote((int)keycode, currentOctave);
-	std::string noteName = midiNoteMap.GetNoteName(midiNote);
-	if (curNotes.find(noteName) != curNotes.end()) {
-		curNotes[noteName].SetReleaseTime(curTime);
+	if (curNotes.find(midiNote) != curNotes.end()) {
+		curNotes[midiNote].SetReleaseTime(curTime);
 	}
 }
 
-void NoteEventGenerator::TrimNotes(std::vector<std::string> trimNotes)
+void NoteEventGenerator::TrimNotes(std::vector<int> trimNotes)
 {
 	for (auto trimNote : trimNotes) {
 		auto it = curNotes.find(trimNote);
@@ -64,7 +68,7 @@ bool NoteEventGenerator::IsValidNote(unsigned char keycode)
 	return midiNoteMap.IsValidNote(keycode);
 }
 
-std::map<std::string, NoteEvent> NoteEventGenerator::GetCurrentNotes()
+std::map<int, NoteEvent> NoteEventGenerator::GetCurrentNotes()
 {
 	return curNotes;
 }

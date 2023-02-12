@@ -29,8 +29,6 @@ private:
 	// pitch envelope
 	std::vector<Oscillator*> oscillators;
 	// osc output mux
-	// ADSR envelope
-	double releaseTime = 0.0;
 	// FFT --> freq domain stage
 	// Filter + it's own ADSR
 };

@@ -5,7 +5,7 @@ SynthModule::SynthModule(int numOscillators)
 	for (int i = 0; i < numOscillators; i++) {
 		//oscillators.push_back(new Oscillator(TRIANGLE));
 		oscillators.push_back(new Oscillator(SINE));
-		oscillators.push_back(new Oscillator(SINE, 12, 1));
+		//oscillators.push_back(new Oscillator(SINE, 12, 1));
 	}
 }
 
@@ -37,28 +37,24 @@ double SynthModule::generateSoundCallback(double dTime, SynthModule* synth)
 
 double SynthModule::generateSound(double dTime)
 {
-	std::vector<std::string> trimNotes;
+	std::vector<int> trimNotes;
 	double soundSample = 0.0;
 	for (auto noteEntry : noteGenerator.GetCurrentNotes()) {
-		std::string noteName = noteEntry.first;
+		int midiNote = noteEntry.first;
 		NoteEvent noteInfo = noteEntry.second;
 
-		uint64_t curTime = Clock.GetTime();
 		uint64_t releaseTime = noteInfo.GetReleaseTime();
-		uint64_t timeDiff = noteInfo.GetReleaseTime() - curTime;
 
 		// If the release envelope is complete, remove note from currently playing notes
-		if (releaseTime > 0 && timeDiff > releaseTime) {
-			trimNotes.push_back(noteName);
+		if (releaseTime > 0) {
+			trimNotes.push_back(midiNote);
 		}
-		else {
-			// generate sound
-			for (auto osc : oscillators) {
-				soundSample += osc->Generate(dTime, noteInfo);
-			}
+		// generate sound
+		for (auto osc : oscillators) {
+			soundSample += osc->Generate(dTime, noteInfo);
 		}
 	}
-	noteGenerator.TrimNotes(trimNotes);
+	//noteGenerator.TrimNotes(trimNotes);
 	return soundSample;
 }
 

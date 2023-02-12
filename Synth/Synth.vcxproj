@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="Envelope.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="NoteEventGenerator.cpp" />
     <ClCompile Include="Oscillator.cpp" />
@@ -141,6 +142,7 @@
   <ItemGroup>
     <ClInclude Include="AudioConstants.h" />
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="Envelope.h" />
     <ClInclude Include="olcNoiseMaker.h" />
     <ClInclude Include="SynthModule.h" />
     <ClInclude Include="WaveTypes.h" />
