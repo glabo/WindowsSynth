@@ -8,6 +8,7 @@
 #include "olcNoiseMaker.h"
 #include "AudioConstants.h"
 #include "SynthModule.h"
+#include "Mouse.h"
 
 
 class Window
@@ -33,6 +34,7 @@ private:
 	HINSTANCE m_hInstance;
 	// window instance
 	HWND m_hWnd;
+	Mouse mouse;
 
 	WindowText keyboardInputText;
 	SynthModule synthModule;

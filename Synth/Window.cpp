@@ -149,7 +149,25 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_CHAR:
 		//kbd.OnChar(static_cast<unsigned char>(wParam));
 		break;
+
+	/*********** Keyboard Messages *************/
+	case WM_MOUSEMOVE:
+		mouse.OnMouseMove(LOWORD(lParam), HIWORD(lParam));
+		break;
+	case WM_LBUTTONDOWN:
+		mouse.OnLButtonPress();
+		break;
+	case WM_RBUTTONDOWN:
+		mouse.OnRButtonPress();
+		break;
+	case WM_LBUTTONUP:
+		mouse.OnLButtonRelease();
+		break;
+	case WM_RBUTTONUP:
+		mouse.OnRButtonRelease();
+		break;
 	}
+
 	if (updateWindow) {
 		InvalidateRect(hWnd, NULL, false);
 	}
