@@ -9,6 +9,7 @@
 #include "AudioConstants.h"
 #include "SynthModule.h"
 
+
 class Window
 {
 public:
@@ -24,6 +25,9 @@ private:
 	LRESULT HandleMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	
 private:
+	unsigned long BGCOLOR = 0x001D2229;
+	unsigned long HILITECOLOR = 0x00006EF3;
+
 	const wchar_t* CLASS_NAME = L"Synth Window Class";
 	// application instance
 	HINSTANCE m_hInstance;

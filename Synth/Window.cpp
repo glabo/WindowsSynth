@@ -125,6 +125,15 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		ReleaseDC(hWnd, hdc);
 		break;
 	}
+	case WM_ERASEBKGND:
+	{
+		RECT rc;
+		GetClientRect(hWnd, &rc);
+		// color it dark gray
+		SetBkColor((HDC)wParam, BGCOLOR); // grey-brown ish
+		ExtTextOut((HDC)wParam, 0, 0, ETO_OPAQUE, &rc, 0, 0, 0);
+		return 1;
+	}
 
 		/*********** Keyboard Messages *************/
 	case WM_KEYDOWN:
