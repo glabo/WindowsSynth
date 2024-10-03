@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Graham\source\repos\Synth\Synth\Oscillator;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,35 +128,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Clock.cpp" />
-    <ClCompile Include="Envelope.cpp" />
-    <ClCompile Include="Keyboard.cpp" />
-    <ClCompile Include="Mouse.cpp" />
-    <ClCompile Include="NoteEventGenerator.cpp" />
-    <ClCompile Include="Oscillator.cpp" />
-    <ClCompile Include="NoteEvent.cpp" />
+    <ClCompile Include="IO\Keyboard.cpp" />
+    <ClCompile Include="IO\Mouse.cpp" />
+    <ClCompile Include="NoteEventGenerator\NoteEvent.cpp" />
+    <ClCompile Include="NoteEventGenerator\NoteEventGenerator.cpp" />
+    <ClCompile Include="Oscillator\Envelope.cpp" />
+    <ClCompile Include="Oscillator\Oscillator.cpp" />
+    <ClCompile Include="Oscillator\WaveGenerator.cpp" />
     <ClCompile Include="Synth.cpp" />
-    <ClCompile Include="SynthModule.cpp" />
-    <ClCompile Include="WaveGenerator.cpp" />
+    <ClCompile Include="SynthModule\SynthModule.cpp" />
+    <ClCompile Include="Utils\Clock.cpp" />
     <ClCompile Include="Window.cpp" />
-    <ClCompile Include="WindowText.cpp" />
+    <ClCompile Include="Windows\WindowText.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioConstants.h" />
-    <ClInclude Include="Clock.h" />
-    <ClInclude Include="Envelope.h" />
-    <ClInclude Include="Mouse.h" />
-    <ClInclude Include="olcNoiseMaker.h" />
-    <ClInclude Include="SynthModule.h" />
-    <ClInclude Include="WaveTypes.h" />
-    <ClInclude Include="Keyboard.h" />
-    <ClInclude Include="MidiNoteMap.h" />
-    <ClInclude Include="NoteEvent.h" />
-    <ClInclude Include="NoteEventGenerator.h" />
-    <ClInclude Include="Oscillator.h" />
-    <ClInclude Include="WaveGenerator.h" />
+    <ClInclude Include="IO\Mouse.h" />
+    <ClInclude Include="NoteEventGenerator\MidiNoteMap.h" />
+    <ClInclude Include="NoteEventGenerator\NoteEvent.h" />
+    <ClInclude Include="NoteEventGenerator\NoteEventGenerator.h" />
+    <ClInclude Include="IO\olcNoiseMaker.h" />
+    <ClInclude Include="Oscillator\AudioConstants.h" />
+    <ClInclude Include="Oscillator\Envelope.h" />
+    <ClInclude Include="Oscillator\Oscillator.h" />
+    <ClInclude Include="Oscillator\WaveGenerator.h" />
+    <ClInclude Include="Oscillator\WaveTypes.h" />
+    <ClInclude Include="SynthModule\SynthModule.h" />
+    <ClInclude Include="IO\Keyboard.h" />
+    <ClInclude Include="Utils\Clock.h" />
     <ClInclude Include="Window.h" />
-    <ClInclude Include="WindowText.h" />
+    <ClInclude Include="Windows\WindowText.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

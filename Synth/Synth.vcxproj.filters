@@ -21,34 +21,34 @@
     <ClCompile Include="Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Keyboard.cpp">
+    <ClCompile Include="IO\Keyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WindowText.cpp">
+    <ClCompile Include="Windows\WindowText.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NoteEventGenerator.cpp">
+    <ClCompile Include="SynthModule\SynthModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Clock.cpp">
+    <ClCompile Include="IO\Mouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WaveGenerator.cpp">
+    <ClCompile Include="Oscillator\Oscillator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Oscillator.cpp">
+    <ClCompile Include="Oscillator\WaveGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NoteEvent.cpp">
+    <ClCompile Include="Utils\Clock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SynthModule.cpp">
+    <ClCompile Include="Oscillator\Envelope.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Envelope.cpp">
+    <ClCompile Include="NoteEventGenerator\NoteEventGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Mouse.cpp">
+    <ClCompile Include="NoteEventGenerator\NoteEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,46 +56,46 @@
     <ClInclude Include="Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Keyboard.h">
+    <ClInclude Include="IO\Keyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WindowText.h">
+    <ClInclude Include="Windows\WindowText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NoteEventGenerator.h">
+    <ClInclude Include="IO\olcNoiseMaker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MidiNoteMap.h">
+    <ClInclude Include="SynthModule\SynthModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\Mouse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Oscillator\Oscillator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Oscillator\WaveGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Oscillator\WaveTypes.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="Clock.h">
+    <ClInclude Include="Oscillator\AudioConstants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WaveGenerator.h">
+    <ClInclude Include="Utils\Clock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Oscillator.h">
+    <ClInclude Include="Oscillator\Envelope.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WaveTypes.h">
+    <ClInclude Include="NoteEventGenerator\NoteEventGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NoteEventGenerator\MidiNoteMap.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="NoteEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="olcNoiseMaker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioConstants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SynthModule.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Envelope.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mouse.h">
+    <ClInclude Include="NoteEventGenerator\NoteEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

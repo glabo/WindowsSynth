@@ -3,7 +3,7 @@
 #include <map>
 #include <vector>
 #include "MidiNoteMap.h"
-#include "Clock.h"
+#include "../Utils/Clock.h"
 #include "NoteEvent.h"
 
 class NoteEventGenerator

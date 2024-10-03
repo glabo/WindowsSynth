@@ -55,7 +55,7 @@
 using namespace std;
 
 #include <Windows.h>
-#include "SynthModule.h"
+#include "../SynthModule/SynthModule.h"
 
 const double PI = 2.0 * acos(0.0);
 

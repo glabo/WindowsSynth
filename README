@@ -1,0 +1,8 @@
+This project is as much an exercise in creating a Windows app as it is creating a synth.
+
+A lot of it is boilerplate windows stuff, creating a window, taking keyboard input (and mouse
+input that isn't used), translating keyboard input into MIDI, and handling sound output. Inside
+of all that there is synth code, handling wave generation for multiple oscillators and volume
+envelopes. From a code perspective, making this more functional would be straightforward, but it's
+at the point where I would need to write a UI for it and I have no interest in doing that, so this
+stays where it is.

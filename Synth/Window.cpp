@@ -17,8 +17,8 @@ Window::Window()
 
 	DWORD style = WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU;
 
-	int width = 640;
-	int height = 480;
+	int width = 1000;
+	int height = 400;
 
 	RECT rect;
 	rect.left = 250;

@@ -1,9 +1,9 @@
 #pragma once
-#include "NoteEventGenerator.h"
+#include "../NoteEventGenerator/NoteEventGenerator.h"
 #include "Oscillator.h"
-#include "Keyboard.h"
+#include "../IO/Keyboard.h"
 #include "WaveTypes.h"
-#include "Clock.h"
+#include "../Utils/Clock.h"
 #include <vector>
 
 class SynthModule

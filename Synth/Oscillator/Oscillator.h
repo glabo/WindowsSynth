@@ -1,7 +1,7 @@
 #pragma once
 #include "WaveGenerator.h"
-#include "NoteEvent.h"
-#include "Clock.h"
+#include "../NoteEventGenerator/NoteEvent.h"
+#include "../Utils/Clock.h"
 #include "AudioConstants.h"
 #include "Envelope.h"
 

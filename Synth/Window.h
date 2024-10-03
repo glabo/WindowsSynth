@@ -1,14 +1,14 @@
 #pragma once
 
 #include <Windows.h>
-#include "Keyboard.h"
-#include "WindowText.h"
-#include "NoteEventGenerator.h"
+#include "IO/Keyboard.h"
+#include "Windows/WindowText.h"
+#include "NoteEventGenerator/NoteEventGenerator.h"
 #include "Oscillator.h"
-#include "olcNoiseMaker.h"
+#include "IO/olcNoiseMaker.h"
 #include "AudioConstants.h"
-#include "SynthModule.h"
-#include "Mouse.h"
+#include "SynthModule/SynthModule.h"
+#include "IO/Mouse.h"
 
 
 class Window
